@@ -5,7 +5,7 @@ import {Button} from "@/components/ui/button"
 
 export default function Navbar() {
   return (
-    <nav className="border-b flex justify-center">
+    <nav className="border-b flex justify-center py-[0.5] px-2">
       <div className="container flex items-center justify-between py-1">
         <Link href="/">
           <Image
@@ -28,8 +28,8 @@ export default function Navbar() {
         </div>
 
         <div className=" space-x-2 md:flex">
-          <Button variant="outline">Sign In</Button>
-          <Button>Sign Up</Button>
+          <Button variant="outline" className="hidden lg:block">Sign In</Button>
+          <Button >Sign Up</Button>
         </div>
 
       </div>
