@@ -15,14 +15,17 @@ export default function Navbar() {
           />
         </Link>
         <div className="hidden space-x-6 md:flex">
-          <Link href="/about" className="text-md font-medium transition-colors hover:text-primary">
+          <Link href="/about" className="text-md font-semibold transition-colors hover:text-primary">
             About
           </Link>
-          <Link href="/features" className="text-md font-medium transition-colors hover:text-primary">
+          <Link href="/features" className="text-md font-semibold transition-colors hover:text-primary">
             Features
           </Link>
-          <Link href="/contact" className="text-md font-medium transition-colors hover:text-primary">
+          <Link href="/contact" className="text-md font-semibold transition-colors hover:text-primary">
             Contact
+          </Link>
+          <Link href="/docs" className="text-md font-semibold transition-colors hover:text-primary">
+            Docs
           </Link>
         </div>
 
