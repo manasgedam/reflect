@@ -1,6 +1,5 @@
 import Link from "next/link"
 import Image from "next/image"
-import logo from "@/app/assets/images/logo.png"
 import {Button} from "@/components/ui/button"
 
 export default function Navbar() {
@@ -9,7 +8,7 @@ export default function Navbar() {
       <div className="container flex items-center justify-between py-1">
         <Link href="/">
           <Image
-            src={logo}
+            src="/images/logo.png"
             width={70}
             height={70}
             alt="logo"
