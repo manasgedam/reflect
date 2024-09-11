@@ -4,13 +4,13 @@ import {Button} from "@/components/ui/button"
 
 export default function Navbar() {
   return (
-    <nav className="border-b flex justify-center py-[0.5] px-2">
+    <nav className="border-b flex justify-center sm:py-0 px-2">
       <div className="container flex items-center justify-between py-1">
         <Link href="/">
           <Image
             src="/images/logo.png"
-            width={70}
-            height={70}
+            width={60}
+            height={60}
             alt="logo"
           />
         </Link>

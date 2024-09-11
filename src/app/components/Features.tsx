@@ -5,9 +5,9 @@ export default function Features() {
     return (
         <>
         <div className="w-full md:p-14 lg:p-20 flex justify-center">
-            <h1 className='font-bold text-4xl'>Our Top Features</h1>
+            <h1 className='font-bold text-5xl'>Our Top Features</h1>
         </div>
-            <section className="w-full flex justify-center">
+            <section className="w-full flex justify-center mt-10 lg:mt-0">
                 <div className="container px-4 md:px-6">
                     <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
                         <Card>

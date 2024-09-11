@@ -3,6 +3,7 @@ import Navbar from '@/app/components/Navbar'
 import Hero from "@/app/components/Hero"
 import Video from "@/app/components/Video"
 import Features from "@/app/components/Features"
+import Contact from "@/app/components/Contact"
 export default function page() {
   return (
     <div>
@@ -10,6 +11,7 @@ export default function page() {
       <Hero />
       <Video />
       <Features/>
+      <Contact />
     </div>
   )
 }
