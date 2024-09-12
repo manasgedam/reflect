@@ -7,12 +7,12 @@ import { Textarea } from "@/components/ui/textarea"
 export default function Contact() {
     return (
         <>
-            <section className="min-h-screen w-full my-12 md:my-24 lg:my-32 flex flex-col justify-center items-center bg-gray-100">
+            <section className="min-h-screen w-full pb-4 md:pb-5 lg:pb-10 flex flex-col justify-center items-center bg-gray-100">
                 <div className="container px-4 md:px-6 w-full max-w-[1000px]">
                     <div className="">
                         <div className="space-y-4">
                             <div className="inline-block rounded-lg bg-gray-200 px-3 py-1 text-sm">
-                                Contact Information
+                                Contact Us
                             </div>
                             <h2 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem]">
                                 Get in touch

@@ -5,6 +5,7 @@ import Video from "@/app/components/Video"
 import Features from "@/app/components/Features"
 import Contact from "@/app/components/Contact"
 import Footer from "@/app/components/Footer"
+import About from "@/app/components/About"
 export default function page() {
   return (
     <div>
@@ -12,6 +13,7 @@ export default function page() {
       <Hero />
       <Video />
       <Features/>
+      <About/>
       <Contact />
       <Footer />
     </div>
