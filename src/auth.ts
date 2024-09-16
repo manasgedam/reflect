@@ -9,5 +9,8 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
         logo: "/images/logo.png",
         colorScheme: "light",
     },
+    pages: {
+        signIn: '/auth/sign-in'
+    },
     providers: [Google],
 });
