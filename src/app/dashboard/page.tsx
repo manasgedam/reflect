@@ -1,12 +1,13 @@
 import { auth } from "@/auth"
- 
-export default async function Page() {
-  const session = await auth()
-  if (!session) return <div>Not authenticated</div>
- 
+import Dashboard from "@/app/_components/Dashboard"
+
+export default async function page() {
+  // const session = await auth()
+  // if (!session) return <div>Not authenticated</div>
   return (
     <div>
-      <pre>{JSON.stringify(session, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
+      <Dashboard />
     </div>
   )
 }
