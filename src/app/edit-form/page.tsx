@@ -1,5 +1,5 @@
 import { auth } from "@/auth"
-import Dashboard from "@/app/_components/Dashboard"
+import EditForm from "@/app/_components/EditForm"
 
 export default async function page() {
   // const session = await auth()
@@ -7,7 +7,7 @@ export default async function page() {
   return (
     <div>
       {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
-      <Dashboard />
+      <EditForm />
     </div>
   )
 }
