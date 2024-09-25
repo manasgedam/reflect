@@ -18,10 +18,8 @@ export default async function RootLayout({
 }>) {
 
   return (
-    <html lang="en">
-      <body
-        className={`${figtree.className} antialiased`}
-      >
+    <html lang="en" className={figtree.className}>
+      <body>
         {children}
       </body>
     </html>

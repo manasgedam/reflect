@@ -1,13 +1,13 @@
-import { auth } from "@/auth"
-import EditForm from "@/app/_components/EditForm"
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-export default async function page() {
-  // const session = await auth()
-  // if (!session) return <div>Not authenticated</div>
-  return (
-    <div>
-      {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
-      <EditForm />
-    </div>
-  )
+export default function EditFormIndex() {
+    const router = useRouter();
+
+    useEffect(() => {
+        router.push("/edit-form/0");
+    }, [router]);
+
+    return null;
 }

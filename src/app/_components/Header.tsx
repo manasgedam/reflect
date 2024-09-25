@@ -3,8 +3,13 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import React, { useState } from 'react';
+import { Menu } from 'lucide-react';
 
-export default function Header() {
+interface HeaderProps {
+  onToggleSidebar: () => void;  // Accept a function to toggle sidebar
+}
+
+export default function Header({ onToggleSidebar }: HeaderProps) {
   const [title, setTitle] = useState('TY CSE Course Feedback Form');
 
   const handleTitleChange = (e: React.FormEvent<HTMLSpanElement>) => {
@@ -14,6 +19,9 @@ export default function Header() {
   return (
     <header className="w-full p-3 flex justify-between items-center">
       <div className="flex items-center justify-center gap-3 text-lg font-semibold">
+        <button onClick={onToggleSidebar} className="p-[7px]">
+          <Menu size={24} />
+        </button>
         <Link href="/">
           <Image
             src="/images/logo.png"
