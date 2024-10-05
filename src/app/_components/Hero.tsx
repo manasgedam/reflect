@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import Link from "next/Link"
+import Link from "next/link"
 import { auth } from "@/auth"
 export default async function Hero() {
   const session = await auth()

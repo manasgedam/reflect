@@ -1,9 +1,5 @@
-import { auth } from "@/auth"
- 
-export default async function Page() {
-  const session = await auth()
-  if (!session) return <div>Not authenticated</div>
- 
+
+ export default async function Page() {
   return (
     <div>
       <h1>Helloo</h1>
