@@ -63,7 +63,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
     callbacks: {
         authorized({ request: { nextUrl }, auth }) {
-            const isLoggedIn = auth?.user
+            const isLoggedIn = !!auth?.user
             const { pathname } = nextUrl
 
             if (publicRoutes.includes(pathname)) {
