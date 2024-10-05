@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button"
-import { auth, signIn } from "@/auth"
-
+import Link from "next/Link"
+import { auth } from "@/auth"
 export default async function Hero() {
-
   const session = await auth()
-
   return (
     <div className=" bg-background flex flex-col items-center mt-20 p-4">
       <div className="max-w-3xl w-full space-y-8 text-center">
@@ -15,7 +13,15 @@ export default async function Hero() {
           This is where you can manage all your important tasks, view analytics, and stay on top of your projects. Get started now to unlock the full potential of our platform.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          {session?.user ? <Button> Go to Dashboard</Button> : <SignInButton />}
+          {session?.user ? (
+            <Link href="/dashboard">
+              <Button variant="default" size="lg">
+                Go to Dashboard
+              </Button>
+            </Link>
+          ) : ( 
+            <Button>Get Started</Button>
+          )}
           <Button variant="outline" size="lg">
             Learn More
           </Button>
@@ -25,15 +31,3 @@ export default async function Hero() {
   )
 }
 
-export function SignInButton() {
-  return (
-    <form action={async () => {
-      "use server"
-      await signIn()
-    }}>
-      <div className="flex flex-col sm:flex-row justify-center gap-4">
-        <Button size="lg" >Get Started</Button>
-      </div>
-    </form>
-  )
-}

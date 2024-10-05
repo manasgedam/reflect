@@ -1,9 +1,10 @@
-import React from 'react'
 
-export default function page() {
+function page() {
   return (
     <div>
-      form
+      Hello
     </div>
   )
 }
+
+export default page

@@ -6,7 +6,7 @@ export default async function Page() {
  
   return (
     <div>
-      <pre>{JSON.stringify(session, null, 2)}</pre>
+      <h1>Helloo</h1>
     </div>
   )
 }
