@@ -20,7 +20,7 @@ export default async function Hero() {
               </Button>
             </Link>
           ) : ( 
-            <Button>Get Started</Button>
+            <Link href="/auth/signin"><Button>Get Started</Button></Link>
           )}
           <Button variant="outline" size="lg">
             Learn More
