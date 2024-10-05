@@ -2,7 +2,6 @@
 
 import {signIn, signOut} from '@/auth'
 import { signUpSchema } from '@/lib/zod'
-import { Prisma } from '@prisma/client'
 import { AuthError } from 'next-auth'
 import bcryptjs from "bcryptjs";
 import prisma from '@/lib/prisma'
