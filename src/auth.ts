@@ -9,10 +9,6 @@ const publicRoutes = ['/', '/auth/signin', '/auth/signup']
 const authRoutes = ['/auth/signin', '/auth/signup']
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-    theme: {
-        logo: "/images/logo.png",
-        colorScheme: "light",
-    },
 
     providers: [Google,
         Credentials({
