@@ -5,10 +5,12 @@ import { signInSchema } from "./lib/zod"
 import prisma from "./lib/prisma"
 import bcryptjs from "bcryptjs"
 
-const publicRoutes = ['/']
+const publicRoutes = ['/', '/auth/signin', '/auth/signup']
 const authRoutes = ['/auth/signin', '/auth/signup']
+import { PrismaAdapter } from "@auth/prisma-adapter";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+    adapter: PrismaAdapter(prisma),
 
     providers: [Google,
         Credentials({
@@ -89,6 +91,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             session.user.id = token.id as string;
             return session;
         }
+    },
+
+    session: {
+        strategy: "jwt",
     },
 
     pages: {
