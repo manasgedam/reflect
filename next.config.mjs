@@ -5,11 +5,11 @@ const nextConfig = {
         ignoreDuringBuilds: true,
     },
     images: {
-        domains: ["lh3.googleusercontent.com"],
+        domains: ["*"],
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'reflect-xl.vercel.app',
+                hostname: '**',
             }
         ]
     }
