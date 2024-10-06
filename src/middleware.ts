@@ -3,3 +3,4 @@ export const config = {
     matcher: ["/((?!api|_next/static|.*\\.mp4$).*)"],
 
 };
+

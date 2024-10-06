@@ -24,7 +24,13 @@ export default async function Navbar() {
     <nav className="border-b flex justify-center sm:py-0 px-2">
       <div className="container flex items-center justify-between py-1">
         <Link href="/">
-            <img src="/images/logo.png" alt="logo" className="h-16 w-16" />
+          <Image
+            src="/images/logo.png"
+            width={60}
+            height={60}
+            alt="logo"
+            draggable={false}
+          />
         </Link>
         <div className="hidden space-x-6 md:flex">
           <Link href="/about" className="text-md font-semibold transition-colors hover:text-primary">
