@@ -73,6 +73,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 return true
             }
             return isLoggedIn
+        },
+
+        jwt({ token, user, trigger, session }) {
+            if (user) {
+                token.id = user.id as string;
+            }
+            if (trigger === "update" && session) {
+                token = { ...token, ...session };
+            }
+            return token;
+        },
+
+        session({ session, token }) {
+            session.user.id = token.id as string;
+            return session;
         }
     },
 
