@@ -7,6 +7,7 @@ import { NextAuthConfig } from "next-auth"
 
 const publicRoutes = ['/', '/auth/signin', '/auth/signup']
 const authRoutes = ['/auth/signin', '/auth/signup']
+const protectedRoutes = ['/dashboard']
 
 export default {
     
@@ -18,10 +19,9 @@ export default {
             },
 
             async authorize(credentials) {
-                // user object 
                 let user = null
-                // validate user
 
+                // validate user
                 const parsedCredentials = signInSchema.safeParse(credentials)
                 if (!parsedCredentials.success) {
                     console.log("Invalid credentials: ", parsedCredentials.error)
