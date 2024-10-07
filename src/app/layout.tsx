@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google"
 import "./globals.css";
+import { Suspense } from "react";
 
 const figtree = Figtree({
   subsets: ['latin']
@@ -22,8 +23,9 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={`${figtree.className} antialiased`}
-      >
-        {children}
+      > <Suspense fallback={<div>Loading...</div>}>
+          {children}
+        </Suspense>
       </body>
     </html>
   );

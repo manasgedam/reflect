@@ -24,7 +24,6 @@ import { handleGoogleSignIn } from '@/app/actions/authAction'
 import Link from 'next/link'
 import { FcGoogle } from "react-icons/fc"
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Divide } from 'lucide-react'
 
 export default function SignInForm() {
 
@@ -68,7 +67,7 @@ export default function SignInForm() {
     }
   }
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+   
           <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
@@ -133,6 +132,5 @@ export default function SignInForm() {
         </CardContent>
       </Card>
     </div>
-    </Suspense>
   )
 }
