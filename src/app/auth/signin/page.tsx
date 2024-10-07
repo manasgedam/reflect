@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -23,7 +23,31 @@ import ErrorMessage from '@/components/ui/errorMessage'
 import { handleGoogleSignIn } from '@/app/actions/authAction'
 import Link from 'next/link'
 import { FcGoogle } from "react-icons/fc"
+import { useRouter, useSearchParams } from 'next/navigation'
+
 export default function SignInForm() {
+
+  const params = useSearchParams()
+  const error = params.get('error')
+  const router = useRouter()
+
+  useEffect(() => {
+    if(error) {
+      switch(error) {
+        case "OAuthAccountNotLinked":
+          setGlobalError(
+            "Please use your email and password to sign in."
+          )
+          break
+        default:
+          setGlobalError(
+            "An unexpected error occured. Please try again."
+          )
+      }
+    }
+    router.replace('/auth/signin')
+  }, [error, router])
+
   const [globalError, setGlobalError] = useState<string>("")
 
   const form = useForm<z.infer<typeof signInSchema>>({
