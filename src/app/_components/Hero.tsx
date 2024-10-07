@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { auth } from "@/auth"
+import {useSession} from "next-auth/react"
 
 export default async function Hero() {
-  const session = await auth()
+  const {data: session} = useSession()
+  // const session = await auth()
   console.log("heweo:"+session?.user?.email);
   
   return (

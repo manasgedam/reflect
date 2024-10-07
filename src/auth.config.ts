@@ -7,7 +7,7 @@ import { NextAuthConfig } from "next-auth"
 
 const publicRoutes = ['/', '/auth/signin', '/auth/signup']
 const authRoutes = ['/auth/signin', '/auth/signup']
-const protectedRoutes = ['/dashboard']
+// const protectedRoutes = ['/dashboard']
 
 export default {
     
