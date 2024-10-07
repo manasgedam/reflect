@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -24,6 +24,7 @@ import { handleGoogleSignIn } from '@/app/actions/authAction'
 import Link from 'next/link'
 import { FcGoogle } from "react-icons/fc"
 import { useRouter, useSearchParams } from 'next/navigation'
+import { Divide } from 'lucide-react'
 
 export default function SignInForm() {
 
@@ -67,7 +68,8 @@ export default function SignInForm() {
     }
   }
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <Suspense fallback={<div>Loading...</div>}>
+          <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">Sign in to your account</CardTitle>
@@ -131,5 +133,6 @@ export default function SignInForm() {
         </CardContent>
       </Card>
     </div>
+    </Suspense>
   )
 }
