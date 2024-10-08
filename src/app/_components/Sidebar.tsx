@@ -9,13 +9,12 @@ interface NavItemProps {
     label: string;
     isActive?: boolean;
     isCollapsed: boolean;
-    onClick: () => void;
+    index: number;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ icon, label, isActive, isCollapsed, onClick }) => (
+const NavItem: React.FC<NavItemProps> = ({ icon, label, isActive, isCollapsed, index }) => (
     <Link
-        href=""
-        onClick={onClick}
+        href={`/edit-form/${index}`}
         className={`flex items-center py-[7px] px-2 gap-2 h-[38px] text-gray-800 rounded-lg transition-all duration-300 ease-in-out
             ${isActive ? 'bg-gray-300 text-gray-900 font-bold' : 'text-gray-800 font-medium hover:bg-gray-200'}
             ${isCollapsed ? 'justify-center' : ''}`}
@@ -28,10 +27,9 @@ const NavItem: React.FC<NavItemProps> = ({ icon, label, isActive, isCollapsed, o
 interface SidebarProps {
     active?: number;
     isCollapsed: boolean;
-    onSectionChange: (index: number) => void;
 }
 
-export default function Sidebar({ active, isCollapsed, onSectionChange }: SidebarProps) {
+export default function Sidebar({ active, isCollapsed }: SidebarProps) {
     const navItems = [
         { icon: <CircleHelp />, label: "Questions" },
         { icon: <MessageSquareQuote />, label: "Response Summary" },
@@ -42,8 +40,8 @@ export default function Sidebar({ active, isCollapsed, onSectionChange }: Sideba
     ];
 
     return (
-        <aside className={`w-65 h-full px-3 py-3 flex flex-col justify-between gap-3`}>
-            <nav className="flex flex-col gap-1">
+        <aside className={`w-65 min-h-screen px-3 pt-3 flex flex-col justify-between gap-3`}>
+            <nav className="flex flex-col gap-1 flex-grow">
                 {navItems.map((item, index) => (
                     <NavItem
                         key={index}
@@ -51,32 +49,37 @@ export default function Sidebar({ active, isCollapsed, onSectionChange }: Sideba
                         label={item.label}
                         isActive={index === active}
                         isCollapsed={isCollapsed}
-                        onClick={() => onSectionChange(index)} />
+                        index={index} />
                 ))}
             </nav>
-            <div className="mt-auto flex flex-col gap-1">
-                <NavItem
-                    icon={<Settings />}
-                    label="Settings"
-                    isCollapsed={isCollapsed}
-                    onClick={() => onSectionChange(6)} />
-                <NavItem
-                    icon={<Bell />}
-                    label="Notifications"
-                    isCollapsed={isCollapsed}
-                    onClick={() => onSectionChange(7)} />
-                <NavItem
-                    icon={<LogOut />}
-                    label="Sign Out"
-                    isCollapsed={isCollapsed}
-                    onClick={() => onSectionChange(8)} />
-            </div>
-            <div className={`flex items-center gap-2 border border-gray-300 p-2 h-[42px] bg-white rounded-md cursor-pointer z-10 ${isCollapsed ? 'justify-center' : ''}`}>
-                <Avatar className="w-[20px] h-[20px]">
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                {!isCollapsed && <span>Manas Gedam</span>}
+            <div className='flex flex-col gap-3 mt-auto sticky bottom-0 pb-3'>
+                <div className="flex flex-col gap-1">
+                    <NavItem
+                        icon={<Settings />}
+                        label="Settings"
+                        isCollapsed={isCollapsed}
+                        isActive={6 === active}
+                        index={6} />
+                    <NavItem
+                        icon={<Bell />}
+                        label="Notifications"
+                        isCollapsed={isCollapsed}
+                        isActive={7 === active}
+                        index={7} />
+                    <NavItem
+                        icon={<LogOut />}
+                        label="Sign Out"
+                        isCollapsed={isCollapsed}
+                        isActive={8 === active}
+                        index={8} />
+                </div>
+                <div className={`flex items-center gap-2 border border-gray-300 p-2 h-[42px] bg-white rounded-md cursor-pointer z-10 ${isCollapsed ? 'justify-center' : ''}`}>
+                    <Avatar className="w-[20px] h-[20px]">
+                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                    {!isCollapsed && <span>Manas Gedam</span>}
+                </div>
             </div>
         </aside>
     );
