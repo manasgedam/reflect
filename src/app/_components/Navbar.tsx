@@ -20,8 +20,6 @@ export default async function Navbar() {
   
   const session = await auth()
 
-  console.log(session?.user?.email)
-
   return (
     <nav className="border-b flex justify-center sm:py-0 px-2">
       <div className="container flex items-center justify-between py-1">

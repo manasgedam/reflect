@@ -1,13 +1,10 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { auth } from "@/auth"
-import {useSession} from "next-auth/react"
 
 export default async function Hero() {
-  const {data: session} = useSession()
-  // const session = await auth()
-  console.log("heweo:"+session?.user?.email);
-  
+  const session = await auth()
+
   return (
     <div className="bg-background flex flex-col items-center mt-20 p-4">
       <div className="max-w-3xl w-full space-y-8 text-center">
@@ -19,7 +16,7 @@ export default async function Hero() {
         </p>
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full">
           {session?.user ? (
-            <Link href="/dashboard" className="w-full sm:w-auto">
+            <Link href="/form-dashboard" className="w-full sm:w-auto">
               <Button variant="default" size="lg" className="w-full sm:w-auto">
                 Go to Dashboard
               </Button>
