@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { useClipboard } from 'use-clipboard-copy'
 import { Button } from "@/components/ui/button"
@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Label } from "@/components/ui/label"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
-import { PlusCircle, Trash2, Image as ImageIcon, Video, Type, List, HelpCircle, Copy, Check, Link as LinkIcon } from 'lucide-react'
+import { PlusCircle, Trash2, Image as ImageIcon, Video, Type, List, HelpCircle, Copy, Check, Link as LinkIcon, X } from 'lucide-react'
 
 type QuestionType = 'mcq' | 'text' | 'video'
 
@@ -32,6 +32,8 @@ export default function EnhancedFormBuilder() {
   const [formUrl, setFormUrl] = useState('')
   const clipboard = useClipboard()
 
+  const formImageInputRef = useRef<HTMLInputElement>(null)
+
   const handleFormImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
@@ -40,6 +42,17 @@ export default function EnhancedFormBuilder() {
         setFormImage(reader.result as string)
       }
       reader.readAsDataURL(file)
+    }
+  }
+
+  const triggerFormImageUpload = () => {
+    formImageInputRef.current?.click()
+  }
+
+  const removeFormImage = () => {
+    setFormImage(null)
+    if (formImageInputRef.current) {
+      formImageInputRef.current.value = ''
     }
   }
 
@@ -102,15 +115,26 @@ export default function EnhancedFormBuilder() {
     }
   }
 
+  const triggerQuestionImageUpload = (questionId: string) => {
+    const fileInput = document.getElementById(`question-image-upload-${questionId}`) as HTMLInputElement
+    fileInput?.click()
+  }
+
+  const removeQuestionImage = (questionId: string) => {
+    updateQuestion(questionId, { image: undefined })
+    const fileInput = document.getElementById(`question-image-upload-${questionId}`) as HTMLInputElement
+    if (fileInput) {
+      fileInput.value = ''
+    }
+  }
+
   const generateFormUrl = () => {
-    // In a real application, this would generate a unique URL
     const uniqueId = Math.random().toString(36).substring(2, 15)
     return `https://yourformapp.com/form/${uniqueId}`
   }
 
   const handlePublish = () => {
     setIsPublished(true)
-    // handle calls your backend to publish the form
     setFormUrl(generateFormUrl())
   }
 
@@ -127,9 +151,22 @@ export default function EnhancedFormBuilder() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
+          {formImage && (
+            <div className="mb-4 relative">
+              <img src={formImage} alt="Form" className="w-full h-48 object-cover rounded-lg shadow-md" />
+              <Button
+                variant="destructive"
+                size="icon"
+                className="absolute top-2 right-2"
+                onClick={removeFormImage}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          )}
           <Card className="mb-8 shadow-lg">
             <CardHeader>
-              <CardTitle className="flex items-center justify-between gap-7">
+              <CardTitle className="flex items-center justify-between">
                 <Input
                   value={formTitle}
                   onChange={(e) => setFormTitle(e.target.value)}
@@ -145,13 +182,12 @@ export default function EnhancedFormBuilder() {
                         onChange={handleFormImageUpload}
                         className="hidden"
                         id="form-image-upload"
+                        ref={formImageInputRef}
                       />
-                      <label htmlFor="form-image-upload" className="cursor-pointer">
-                        <Button variant="outline" size="sm">
-                          <ImageIcon className="h-4 w-4 mr-2" />
-                          {formImage ? 'Change Form Image' : 'Add Form Image'}
-                        </Button>
-                      </label>
+                      <Button variant="outline" size="sm" onClick={triggerFormImageUpload}>
+                        <ImageIcon className="h-4 w-4 mr-2" />
+                        {formImage ? 'Change Form Image' : 'Add Form Image'}
+                      </Button>
                     </div>
                   </TooltipTrigger>
                   <TooltipContent>
@@ -169,13 +205,6 @@ export default function EnhancedFormBuilder() {
                 />
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              {formImage && (
-                <div className="mb-4">
-                  <img src={formImage} alt="Form" className="max-w-full h-auto rounded-lg shadow-md" />
-                </div>
-              )}
-            </CardContent>
           </Card>
         </motion.div>
 
@@ -188,6 +217,19 @@ export default function EnhancedFormBuilder() {
           >
             <Card className="mb-6 shadow-md">
               <CardContent className="pt-6">
+                {question.image && (
+                  <div className="mb-4 relative">
+                    <img src={question.image} alt="Question" className="w-full h-48 object-cover rounded-lg shadow-sm" />
+                    <Button
+                      variant="destructive"
+                      size="icon"
+                      className="absolute top-2 right-2"
+                      onClick={() => removeQuestionImage(question.id)}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                )}
                 <div className="flex items-center mb-4">
                   <Label className="text-lg font-semibold">Question {index + 1}</Label>
                   <Select
@@ -231,18 +273,11 @@ export default function EnhancedFormBuilder() {
                     className="hidden"
                     id={`question-image-upload-${question.id}`}
                   />
-                  <label htmlFor={`question-image-upload-${question.id}`} className="cursor-pointer">
-                    <Button variant="outline" size="sm">
-                      <ImageIcon className="h-4 w-4 mr-2" />
-                      {question.image ? 'Change Question Image' : 'Add Question Image'}
-                    </Button>
-                  </label>
+                  <Button variant="outline" size="sm" onClick={() => triggerQuestionImageUpload(question.id)}>
+                    <ImageIcon className="h-4 w-4 mr-2" />
+                    {question.image ? 'Change Question Image' : 'Add Question Image'}
+                  </Button>
                 </div>
-                {question.image && (
-                  <div className="mb-4">
-                    <img src={question.image} alt="Question" className="max-w-full h-auto rounded-lg shadow-sm" />
-                  </div>
-                )}
                 {question.type === 'mcq' && question.options && (
                   <div className="space-y-2">
                     {question.options.map((option, optionIndex) => (
@@ -336,6 +371,7 @@ export default function EnhancedFormBuilder() {
                   <AlertDialogContent>
                     <AlertDialogHeader>
                       <AlertDialogTitle>Are you sure you want to publish this form?</AlertDialogTitle>
+                      
                       <AlertDialogDescription>
                         This action will make your form accessible to others. You can unpublish it later if needed.
                       </AlertDialogDescription>
@@ -368,7 +404,7 @@ export default function EnhancedFormBuilder() {
               </CardHeader>
               <CardContent>
                 <div className="flex items-center space-x-2">
-                  <Input  value={formUrl} readOnly className="flex-grow" />
+                  <Input value={formUrl} readOnly className="flex-grow" />
                   <Button
                     onClick={() => clipboard.copy(formUrl)}
                     variant="outline"

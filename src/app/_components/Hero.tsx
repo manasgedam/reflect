@@ -4,7 +4,7 @@ import { auth } from "@/auth"
 
 export default async function Hero() {
   const session = await auth()
-
+  console.log(session?.user?.id)
   return (
     <div className="bg-background flex flex-col items-center mt-20 p-4">
       <div className="max-w-3xl w-full space-y-8 text-center">
