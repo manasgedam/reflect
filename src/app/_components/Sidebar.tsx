@@ -40,7 +40,7 @@ export default function Sidebar({ active, isCollapsed }: SidebarProps) {
     ];
 
     return (
-        <aside className={`w-65 min-h-screen px-3 pt-3 flex flex-col justify-between gap-3`}>
+        <aside className={` min-h-screen px-3 pt-3 flex flex-col justify-between gap-3`}>
             <nav className="flex flex-col gap-1 flex-grow">
                 {navItems.map((item, index) => (
                     <NavItem

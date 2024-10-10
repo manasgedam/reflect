@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
 import Header from "@/app/_components/Header"
 import Sidebar from "@/app/_components/Sidebar"
-import Questions from "@/app/_components/QuestionsSectionold"
+import EnhancedFormBuilder from "@/app/_components/FormBuilder"
 import ResponseSummary from "@/app/_components/ResponseSummary";
 import IndividualResponses from "@/app/_components/IndividualResponses";
 import QuestionReports from "@/app/_components/QuestionReports";
@@ -69,8 +69,8 @@ export default function page({ params }: { params: { slug?: string } }) {
           <Sidebar
             active={activeSection}
             isCollapsed={isSidebarCollapsed} />
-          <div className="flex-1 rounded-md bg-white bg-cover bg-no-repeat m-3">
-            {activeSection === 0 && <Questions />}
+          <div className="flex-1 rounded-md bg-white bg-cover bg-no-repeat m-3 ml-0">
+            {activeSection === 0 && <EnhancedFormBuilder />}
             {activeSection === 1 && <ResponseSummary />}
             {activeSection === 2 && <IndividualResponses />}
             {activeSection === 3 && <QuestionReports/>}
