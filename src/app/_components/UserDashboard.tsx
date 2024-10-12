@@ -11,7 +11,7 @@ import { useState } from "react"
 
 export default function UserDashboard() {
   const [flag, setFlag] = useState(true)
-  const [selectAvatar, setselectAvatar] = useState(null)
+  const [selectAvatar, setselectAvatar] = useState<number | null>(null);
 
   const avatarts = [
     "https://github.com/shadcn.png",
@@ -22,8 +22,8 @@ export default function UserDashboard() {
     "https://github.com/shadcn.png",
   ]
 
-  const handleclick = (index) => {
-    setselectAvatar(index)
+  const handleclick = (index: number) => {
+    setselectAvatar(index);
   }
 
   return (
