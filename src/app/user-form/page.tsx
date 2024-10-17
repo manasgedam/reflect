@@ -1,9 +1,7 @@
-import UserDashboard from '@/app/_components/UserDashboard'
-import UserResponseDash from '@/app/_components/UserResponseDash'
-import UserThanksPage from '@/app/_components/UserThanksPage'
+import UserFlow from '@/app/_components/UserFlow'
 
 export default function page(){
     return(
-        <UserThanksPage/>
+        <UserFlow/>
     )
 }
