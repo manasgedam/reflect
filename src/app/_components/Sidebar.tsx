@@ -75,10 +75,10 @@ export default function Sidebar({ active, isCollapsed }: SidebarProps) {
                 </div>
                 <div className={`flex items-center gap-2 border border-gray-300 p-2 h-[42px] bg-white rounded-md cursor-pointer z-10 ${isCollapsed ? 'justify-center' : ''}`}>
                     <Avatar className="w-[20px] h-[20px]">
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback>CN</AvatarFallback>
+                        <AvatarImage src="https://avatars.githubusercontent.com/u/63896859?v=4" />
+                        <AvatarFallback>SP</AvatarFallback>
                     </Avatar>
-                    {!isCollapsed && <span>Manas Gedam</span>}
+                    {!isCollapsed && <span>Sharaneshwar Punjal</span>}
                 </div>
             </div>
         </aside>

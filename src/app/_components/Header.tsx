@@ -9,8 +9,9 @@ interface HeaderProps {
   onToggleSidebar: () => void;  // Accept a function to toggle sidebar
 }
 
+// @ts-ignore
 export default function Header({ onToggleSidebar }: HeaderProps) {
-  const [title, setTitle] = useState('TY CSE Course Feedback Form');
+  const [title, setTitle] = useState('Untitled Form');
 
   const handleTitleChange = (e: React.FormEvent<HTMLSpanElement>) => {
     setTitle(e.currentTarget.textContent || '');
@@ -37,7 +38,7 @@ export default function Header({ onToggleSidebar }: HeaderProps) {
           contentEditable
           suppressContentEditableWarning={true}
           onInput={handleTitleChange}>
-          TY CSE Course Feedback Form
+          {title}
         </span>
       </div>
       <div className="flex items-center space-x-2">

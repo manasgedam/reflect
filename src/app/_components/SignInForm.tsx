@@ -39,14 +39,14 @@ export default function SignInForm() {
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <div className="relative">
-                <MailIcon className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                <MailIcon className="absolute left-3 top-2 h-5 w-5 text-gray-400" />
                 <Input id="email" placeholder="joshgates@example.com" type="email" className="pl-10" />
               </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <div className="relative">
-                <LockIcon className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                <LockIcon className="absolute left-3 top-2 h-5 w-5 text-gray-400" />
                 <Input
                   id="password"
                   type={showPassword ? "text" : "password"}
@@ -55,7 +55,7 @@ export default function SignInForm() {
                 <button
                   type="button"
                   onClick={togglePasswordVisibility}
-                  className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-2 text-gray-400 hover:text-gray-600"
                 >
                   {showPassword ? (
                     <EyeOffIcon className="h-5 w-5" />
@@ -104,4 +104,3 @@ export default function SignInForm() {
     </div>
   )
 }
-

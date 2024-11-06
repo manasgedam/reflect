@@ -11,9 +11,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Label } from "@/components/ui/label"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
-import { PlusCircle, Trash2, Image as ImageIcon, Video, Type, List, HelpCircle, Copy, Check, Link as LinkIcon, X } from 'lucide-react'
+import { PlusCircle, Trash2, Image as ImageIcon, Video, Type, List, HelpCircle, Copy, Check, Link as LinkIcon, X, Star } from 'lucide-react'
 
-type QuestionType = 'mcq' | 'text' | 'video'
+type QuestionType = 'mcq' | 'text' | 'video' | 'star-rating'
 
 interface Question {
   id: string
@@ -21,6 +21,7 @@ interface Question {
   text: string
   options?: string[]
   image?: string
+  rating?: number
 }
 
 export default function EnhancedFormBuilder() {
@@ -61,10 +62,11 @@ export default function EnhancedFormBuilder() {
       id: Date.now().toString(),
       type,
       text: '',
-      options: type === 'mcq' ? ['Option 1'] : undefined,
+      options: type === 'mcq' ? ['Option 1'] : undefined
     }
     setQuestions([...questions, newQuestion])
   }
+
 
   const updateQuestion = (id: string, updates: Partial<Question>) => {
     setQuestions(questions.map(q => q.id === id ? { ...q, ...updates } : q))
@@ -130,7 +132,7 @@ export default function EnhancedFormBuilder() {
 
   const generateFormUrl = () => {
     const uniqueId = Math.random().toString(36).substring(2, 15)
-    return `https://yourformapp.com/form/${uniqueId}`
+    return `http://localhost:3000/form/${uniqueId}`
   }
 
   const handlePublish = () => {
@@ -145,7 +147,7 @@ export default function EnhancedFormBuilder() {
 
   return (
     <TooltipProvider>
-      <div className="container mx-auto p-4 max-w-4xl">
+      <div className="container mx-auto p-4 max-w-4xl mt-4">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -170,7 +172,7 @@ export default function EnhancedFormBuilder() {
                 <Input
                   value={formTitle}
                   onChange={(e) => setFormTitle(e.target.value)}
-                  className="text-3xl font-bold border-none focus:ring-0"
+                  className="text-3xl font-bold border-none outline-none focus:ring-0"
                   placeholder="Enter form title"
                 />
                 <Tooltip>
@@ -243,6 +245,7 @@ export default function EnhancedFormBuilder() {
                       <SelectItem value="mcq">Multiple Choice</SelectItem>
                       <SelectItem value="text">Text</SelectItem>
                       <SelectItem value="video">Video</SelectItem>
+                      <SelectItem value="star-rating">Star Rating</SelectItem>
                     </SelectContent>
                   </Select>
                   <Tooltip>
@@ -314,6 +317,27 @@ export default function EnhancedFormBuilder() {
                     <span className="ml-2 text-gray-500">Video response option</span>
                   </div>
                 )}
+                {question.type === 'star-rating' && (
+                  <div className="flex items-center space-x-2">
+                    {Array.from({ length: 10 }).map((_, index) => (
+                      <Tooltip key={index}>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => updateQuestion(question.id, { rating: index + 1 })}
+                          >
+                            <Star/>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{['Very Bad', 'Bad', 'Poor', 'Fair', 'Average', 'Good', 'Very Good', 'Great', 'Superb', 'Excellent'][index]}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    ))}
+                  </div>
+                )}
+
               </CardContent>
             </Card>
           </motion.div>
@@ -359,6 +383,18 @@ export default function EnhancedFormBuilder() {
                   <p>Add a video response question</p>
                 </TooltipContent>
               </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button onClick={() => addQuestion('star-rating')} variant="outline">
+                    <Star className="h-4 w-4 mr-2" />
+                    Add Star Rating
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Add a star rating question</p>
+                </TooltipContent>
+              </Tooltip>
+
             </div>
             <div className="flex space-x-2">
               {!isPublished ? (
@@ -371,7 +407,7 @@ export default function EnhancedFormBuilder() {
                   <AlertDialogContent>
                     <AlertDialogHeader>
                       <AlertDialogTitle>Are you sure you want to publish this form?</AlertDialogTitle>
-                      
+
                       <AlertDialogDescription>
                         This action will make your form accessible to others. You can unpublish it later if needed.
                       </AlertDialogDescription>

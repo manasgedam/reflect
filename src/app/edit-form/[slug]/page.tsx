@@ -73,7 +73,7 @@ export default function page({ params }: { params: { slug?: string } }) {
             {activeSection === 0 && <EnhancedFormBuilder />}
             {activeSection === 1 && <ResponseSummary />}
             {activeSection === 2 && <IndividualResponses />}
-            {activeSection === 3 && <QuestionReports/>}
+            {activeSection === 3 && <QuestionReports />}
             {activeSection === 4 && <div>Actionable Insights Content</div>}
             {activeSection === 5 && <div>Form Settings Content</div>}
             {activeSection === 6 && <div>Settings Content</div>}
